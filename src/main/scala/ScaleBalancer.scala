@@ -14,17 +14,17 @@ object ScaleBalancer {
   def balance(input: String): String = {
     val unwanted: List[String] = List("[", "]")
     val filtered = input.filterNot(n => unwanted.contains(n.toString)).split(",").toList.map(_.toInt)
-    val left: List[Int] = filtered.take(2)
-    val right: List[Int] = if (filtered.length > 2) filtered.takeRight(filtered.length - 2) else Nil
-    val diff: Int = left.max - left.min
+    val scales: List[Int] = filtered.take(2)
+    val weights: List[Int] = if (filtered.length > 2) filtered.takeRight(filtered.length - 2) else Nil
+    val diff: Int = scales.max - scales.min
 
-    if (left.head == left.tail.head) {
+    if (scales.head == scales(1)) {
       ""
-    } else if (right.contains(diff)) {
+    } else if (weights.contains(diff)) {
       diff.toString
-    } else if (right.size > 1) {
-      val matches = right.map(x => x + left.head) intersect right.map(x => x + left.tail.head)
-      s"${matches.head - left.head},${matches.head - left.tail.head}"
+    } else if (weights.size > 1) {
+      val matches = weights.map(_ + scales.head) intersect weights.map(_ + scales.tail.head)
+      s"${matches.head - scales.head},${matches.head - scales.tail.head}"
     } else {
       throw new BalanceNotPossibleException
     }
