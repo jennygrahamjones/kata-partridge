@@ -11,11 +11,17 @@ object ScaleBalancer {
   *  - [4,5,6] represents the weights available to achieve this balance
   * */
 
-  def balance(input: String): String = {
+  def prepareString(input: String): (List[Int], List[Int]) = {
     val unwanted: List[String] = List("[", "]")
     val filtered = input.filterNot(n => unwanted.contains(n.toString)).split(",").toList.map(_.toInt)
     val scales: List[Int] = filtered.take(2)
     val weights: List[Int] = if (filtered.length > 2) filtered.takeRight(filtered.length - 2) else Nil
+    (scales, weights)
+  }
+
+  def balance(input: String): String = {
+    val scales: List[Int] = prepareString(input)._1
+    val weights: List[Int] = prepareString(input)._2
     val diff: Int = scales.max - scales.min
 
     if (scales.head == scales(1)) {
