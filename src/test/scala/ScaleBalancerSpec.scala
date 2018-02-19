@@ -29,7 +29,7 @@ class ScaleBalancerSpec extends WordSpec with MustMatchers {
     }
 
     "return '' when given the input '[4,4],[1,2,3]'" in {
-      ScaleBalancer.balance("[4,4],[1,2,3]")
+      ScaleBalancer.balance("[4,4],[1,2,3]") mustEqual ""
     }
 
   }
