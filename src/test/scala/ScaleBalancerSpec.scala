@@ -8,6 +8,9 @@ class ScaleBalancerSpec extends WordSpec with MustMatchers {
       intercept[BalanceNotPossibleException] {
         ScaleBalancer.balance("[3,4],[]")
       }
+      "return '' when given the input of [3,3]" in {
+        ScaleBalancer.balance("[3,3],[]") mustEqual ""
+      }
     }
 
     "throw a BalanceNotPossibleException when given input '[3,4], [10]'" in {
@@ -26,10 +29,12 @@ class ScaleBalancerSpec extends WordSpec with MustMatchers {
 
     "throw a BalanceNotPossibleException when given the input '[4,7], [1,4]" in {
       intercept[BalanceNotPossibleException] {
-        ScaleBalancer.balance("[4,7], [1,4]")
+        ScaleBalancer.balance("[4,7], [2,4]")
       }
     }
-
   }
-
 }
+
+
+
+
