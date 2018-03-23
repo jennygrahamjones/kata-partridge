@@ -61,7 +61,6 @@ object BankOCR {
   }
 
   case class AccountNumberInput(top: String, middle: String, bottom: String) {
-    override def toString: String = top + middle + bottom
 
     def digitiser(start: Int, end: Int): String = {
       val num: String = top.substring(start, end) + middle.substring(start, end) + bottom.substring(start, end)
