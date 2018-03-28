@@ -7,4 +7,7 @@ scala:
 jdk:
      - oraclejdk7
      - openjdk6
-sbt_args: -no-colors -J-Xss2m
+script:
+  - sbt clean coverage test
+after_success:
+    - sbt coverageReport
