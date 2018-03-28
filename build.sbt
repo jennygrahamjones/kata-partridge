@@ -10,3 +10,8 @@ libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.4" % "test"
 import org.scoverage.coveralls.Imports.CoverallsKeys._
 
 coverallsTokenFile := Some("./coverallsToken.txt")
+
+coverageEnabled := true
+coverageMinimum := 100
+coverageFailOnMinimum := true
+coverageHighlighting := true
