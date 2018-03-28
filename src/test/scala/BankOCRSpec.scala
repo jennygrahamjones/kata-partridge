@@ -1,3 +1,4 @@
+import BankOCR.InvalidChecksumException
 import org.scalatest.{MustMatchers, WordSpec}
 
 class BankOCRSpec extends WordSpec with MustMatchers {
@@ -57,14 +58,14 @@ class BankOCRSpec extends WordSpec with MustMatchers {
 
       "return false if the account number (232323235) does not have a valid checksum" in {
         val input = "232323235"
-        intercept[Exception] {
+        intercept[InvalidChecksumException] {
           BankOCR.evaluateChecksum(input)
         }
       }
 
       "return false if the account number (111111111) does not have a valid checksum" in {
         val input = "111111111"
-        intercept[Exception] {
+        intercept[InvalidChecksumException] {
           BankOCR.evaluateChecksum(input)
         }
       }
