@@ -51,9 +51,9 @@ object BankOCR {
 
   def evaluateChecksum(input: String): Boolean = {
     val str: List[Int] = input.map(_.toString).map(_.toInt).toList
-    val strFormattedAsChecksum = Checksum(str.head, str(1), str(2), str(3), str(4), str(5), str(6), str(7), str(8))
+    val productForEvaluation = str.reverse.zipWithIndex.map(x => x._1 * (x._2 + 1)).sum
 
-    if (strFormattedAsChecksum.isValid) {
+    if (productForEvaluation % 11 == 0) {
       true
     } else {
       throw new InvalidChecksumException("checksum invalid")
@@ -61,12 +61,6 @@ object BankOCR {
   }
 
   class InvalidChecksumException(msg: String) extends Exception(msg)
-
-  case class Checksum(nine: Int, eight: Int, seven: Int, six: Int, five: Int, four: Int, three: Int, two: Int, one: Int) {
-    def isValid: Boolean = {
-      ((one + 2) * (two + 3) * (three + 4) * (four + 5) * (five + 6) * (six + 7) * (seven + 8) * (eight + 9) * nine) % 11 == 0
-    }
-  }
 
   case class AccountNumberInput(top: String, middle: String, bottom: String) {
 
@@ -89,4 +83,5 @@ object BankOCR {
     }
 
   }
+
 }

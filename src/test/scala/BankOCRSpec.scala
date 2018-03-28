@@ -51,20 +51,20 @@ class BankOCRSpec extends WordSpec with MustMatchers {
 
     "checkSum is called" must {
 
-      "return true if the account number (123456789) has a valid checksum" in {
-        val input = "123456789"
+      "return true if the account number (899999999) has a valid checksum" in {
+        val input = "899999999"
         BankOCR.evaluateChecksum(input) mustEqual true
       }
 
-      "return false if the account number (232323235) does not have a valid checksum" in {
-        val input = "232323235"
+      "return false if the account number (999999999) does not have a valid checksum" in {
+        val input = "999999999"
         intercept[InvalidChecksumException] {
           BankOCR.evaluateChecksum(input)
         }
       }
 
-      "return false if the account number (111111111) does not have a valid checksum" in {
-        val input = "111111111"
+      "return false if the account number (490067715) does not have a valid checksum" in {
+        val input = "490067715"
         intercept[InvalidChecksumException] {
           BankOCR.evaluateChecksum(input)
         }
